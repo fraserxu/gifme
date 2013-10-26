@@ -1,4 +1,6 @@
-#### Gifme - make a gif in the browser with webrtc and share
+#### Gifme
+
+Make a gif in the browser and share
 
 ##### Usage
 ```bash
