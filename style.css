@@ -1,0 +1,9 @@
+.container {
+	width: 800px;
+	margin: 20px auto;
+}
+
+.box,
+.header {
+	text-align: center;
+}
