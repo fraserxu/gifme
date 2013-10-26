@@ -1,9 +1,9 @@
-##### gifme
+#### Gifme - make a gif in the browser with webrtc and share
 
 ##### Usage
 ```bash
 $ cd gifme
-$ npm install -g browserify
+$ npm i -g browserify
 $ bin/build
 $ open http://localhost:8000
 ```
