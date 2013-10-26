@@ -11,5 +11,8 @@
     "gifme"
   ],
   "author": "fraserxu",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "filesaver.js": "~2013.01.23"
+  }
 }
