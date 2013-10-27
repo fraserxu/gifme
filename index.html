@@ -6,15 +6,19 @@
     <link rel='stylesheet' href='style.css'>
 </head>
 <body>
-    <section class="container">
-        <section class="header">
-            <h3>gifme by <a href='http://github.com/fraserxu'>fraserxu</a></h3>
+    <div class="wrapper">
+        
+        <header>
+            <h1>gifme by <a href='http://github.com/fraserxu'>fraserxu</a></h1>
+            <div class="description">A tool to make a gif in the browser for sharing</div>
+        </header>
 
+        <section class="box header">
             <ul>
                 <li>Step1: Allow the browser to use you camera by clicking the <b>allow</b> button;</li>
                 <li>Step2: Click <b>capture</b> to make a gif image;</li>
                 <li>Step3:
-                    <ul>
+                    <ul class='sublist'>
                         <li>Click <b>save</b> to save the image to local;</li>
                         <li>Clcik <b>upload</b> to upload image to imgur and share with others;</li>
                     </ul>
@@ -22,27 +26,41 @@
                 <li>Step4: Have fun!</li>
             </ul>
         </section>
-        <section class='box'>
-            <section id='webcam'>
-            </section>  
-            <button id='capture'>capture</button>  
-        </section>
-    
-        <section class='box'>
-            <section id='target_box'>
+
+        <section class='content'>
+            <section class='left'>
+                <section id='webcam'>
+                </section>  
+                <button id='capture'>capture</button>  
             </section>
-            <label for="filename">
-                Filename:
-                <input type="text" id="filename" placeholder="gifme" />
-                .gif
-            </label>
-            <button id='saveAs' disabled>Save</button>
-            <br>
-            or: <button id='upload' disabled>Upload to imgur</button>
-            <br>
-            <section id='share_link'></section>
+
+            <section class='right'>
+                <section id='target_box'>
+                </section>
+                <label for="filename">
+                    Filename:
+                    <input type="text" id="filename" placeholder="gifme" />
+                    .gif
+                </label>
+                <button id='saveAs' disabled>Save</button>
+                <br>
+                or: <button id='upload' disabled>Upload to imgur</button>
+                <span id='share_link'></span>
+            </section> 
         </section>  
-    </section>
+
+        <section class="box footer">
+            <p>Don't hesitate to share it with your friends and <a href='http://xvfeng.me'>me</a> on:</p>
+            <ul>
+                <li>
+                    twitter <a href='https://twitter.com/xvfeng'>@xvfeng</a>       
+                </li>
+                <li>
+                  weibo <a href='http://weibo.com/xvfeng123'>@fraserxv</a>  
+                </li>
+            </ul>
+        </section> 
+    </div>
 
     <a href="https://github.com/fraserxu/gifme"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
