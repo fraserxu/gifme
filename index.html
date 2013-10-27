@@ -9,6 +9,18 @@
     <section class="container">
         <section class="header">
             <h3>gifme by <a href='http://github.com/fraserxu'>fraserxu</a></h3>
+
+            <ul>
+                <li>Step1: Allow the browser to use you camera by clicking the <b>allow</b> button;</li>
+                <li>Step2: Click <b>capture</b> to make a gif image;</li>
+                <li>Step3:
+                    <ul>
+                        <li>Click <b>save</b> to save the image to local;</li>
+                        <li>Clcik <b>upload</b> to upload image to imgur and share with others;</li>
+                    </ul>
+                </li>
+                <li>Step4: Have fun!</li>
+            </ul>
         </section>
         <section class='box'>
             <section id='webcam'>
@@ -24,9 +36,11 @@
                 <input type="text" id="filename" placeholder="gifme" />
                 .gif
             </label>
-            <button id='saveAs'>Save</button>
+            <button id='saveAs' disabled>Save</button>
             <br>
-            <button id='upload'>Upload to imgur</button>
+            or: <button id='upload' disabled>Upload to imgur</button>
+            <br>
+            <section id='share_link'></section>
         </section>  
     </section>
 
