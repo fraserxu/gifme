@@ -13,6 +13,7 @@
   "author": "fraserxu",
   "license": "BSD",
   "dependencies": {
-    "filesaver.js": "~2013.01.23"
+    "imgur-node-api": "0.0.2",
+    "browser-request": "~0.3.1"
   }
 }
