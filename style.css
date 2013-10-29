@@ -72,6 +72,11 @@ button {
 	font-size: 20px;
 }
 
+button:hover, button:focus {
+	outline: none;
+	background-color: #369152;
+}
+
 input {
 	padding: 0 20px;
 	height: 35px;
