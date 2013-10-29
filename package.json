@@ -1,19 +1,15 @@
 {
   "name": "gifme",
   "version": "0.0.1",
-  "description": "gifme",
+  "description": "the easiest way to make and share a gif, right in the browser.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": "",
+  "repository": "https://github.com/fraserxu/gifme",
   "keywords": [
     "gifme"
   ],
   "author": "fraserxu",
   "license": "BSD",
   "dependencies": {
-    "imgur-node-api": "0.0.2",
     "browser-request": "~0.3.1"
   }
 }
