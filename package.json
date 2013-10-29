@@ -10,6 +10,7 @@
   "author": "fraserxu",
   "license": "BSD",
   "dependencies": {
-    "browser-request": "~0.3.1"
+    "browser-request": "~0.3.1",
+    "filesaver.js": "~2013.01.23"
   }
 }
