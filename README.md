@@ -1,10 +1,7 @@
-#### Gifme
+### Gifme
+The easiest way to make and share a gif, right in the browser.
 
-Make a gif in the browser and share
-
-![duck.gif](https://raw.github.com/fraserxu/gifme/master/duck.gif)
-
-##### Usage
+#### Usage
 ```bash
 $ cd gifme
 $ npm i
