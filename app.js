@@ -1004,6 +1004,7 @@ var noGUMSupportTimeout;
  * for when the dimensions are not reported on time),
  * or calls `errorCallback` if something goes wrong
  */
+
 function startStreaming(errorCallback, onStreaming, okCallback) {
 
 	var videoElement;
@@ -1021,7 +1022,7 @@ function startStreaming(errorCallback, onStreaming, okCallback) {
 				attempts++;
 				setTimeout(findVideoSize, 200);
 			} else {
-				onDimensionsReady(640, 480);
+				onDimensionsReady(720, 640);
 			}
 		}
 	};
@@ -1053,6 +1054,7 @@ function startStreaming(errorCallback, onStreaming, okCallback) {
  * where that is not possible (includes 'deceptive' browsers, see inline
  * comment for more info)
  */
+
 function startVideoStreaming(errorCallback, okCallback) {
 	if (navigator.getMedia) {
 		// Some browsers apparently have support for video streaming because of the
@@ -1074,6 +1076,7 @@ function startVideoStreaming(errorCallback, okCallback) {
 	} else {
 		onNoGUMSupport();
 	}
+
 	function onNoGUMSupport() {
 		errorCallback('Native device media streaming (getUserMedia) not supported in this browser.');
 	}
@@ -1083,7 +1086,7 @@ function stopVideoStreaming() {
 	if (cameraStream) {
 		cameraStream.stop();
 	}
-	
+
 	if (video) {
 		video.pause();
 		video.src = null;
@@ -1099,7 +1102,7 @@ var qs = require('querystring');
 var slidr = require('../node_modules/slidr/slidr.js');
 var videoShooter;
 
-var imgur= {
+var imgur = {
 	api: 'https://api.imgur.com/3/image',
 	client: '76e5943d38e8f8e'
 };
@@ -1114,18 +1117,6 @@ var save_button = document.querySelector('#saveAs');
 var upload_button = document.querySelector('#upload');
 var capture_button = document.querySelector('#capture');
 
-if (navigator.getMedia) {
-	gumHelper.startVideoStreaming(function errorCb() {}, function successCallback(stream, videoElement, width, height) {
-		videoElement.width = width / 2;
-		videoElement.height = height / 2;
-		document.querySelector('#webcam').appendChild(videoElement);
-		videoElement.play();
-		videoShooter = new VideoShooter(videoElement);
-	});
-} else {
-	alert('sorry, your browser does\'s support getMedia.');
-}
-
 function getScreenshot(callback, numFrames, interval) {
 	if (videoShooter) {
 		videoShooter.getShot(callback, numFrames, interval);
@@ -1137,14 +1128,28 @@ function getScreenshot(callback, numFrames, interval) {
 // capture a gif
 capture_button.addEventListener('click', function() {
 	var capture_text = capture_button.innerHTML;
-	capture_button.innerHTML = 'capturing...';
-	getScreenshot(function(pictureData) {
-		save_button.disabled = false;
-		upload_button.disabled = false;
+	
+	if (navigator.getMedia) {
+		gumHelper.startVideoStreaming(function errorCb() {}, function successCallback(stream, videoElement, width, height) {
+			videoElement.width = width / 2;
+			videoElement.height = height / 2;
+			document.querySelector('#webcam').appendChild(videoElement);
+			videoElement.play();
+			videoShooter = new VideoShooter(videoElement);
+			
+			capture_button.innerHTML = 'capturing...';
+			getScreenshot(function(pictureData) {
+				save_button.disabled = false;
+				upload_button.disabled = false;
 
-		capture_button.innerHTML = capture_text;
-		s.slide('two');
-	}, 10, 0.2);
+				capture_button.innerHTML = capture_text;
+				s.slide('two');
+			}, 10, 0.2);
+		});
+	} else {
+		alert('sorry, your browser does\'s support getMedia.');
+	}
+
 })
 
 // save to local
@@ -1199,51 +1204,50 @@ function dataURItoBlob(dataURI, dataTYPE) {
 		type: dataTYPE
 	});
 }
-
 },{"../node_modules/slidr/slidr.js":8,"./gumhelper":3,"./videoShooter":5,"browser-request":6,"filesaver.js":7,"querystring":9}],5:[function(require,module,exports){
 var Animated_GIF = require('./Animated_GIF/Animated_GIF.js');
 
 module.exports = function(videoElement) {
-	'use strict';
+    'use strict';
 
-	var canvas = document.createElement('canvas');
-	var context = canvas.getContext('2d');
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
 
-	canvas.width = videoElement.width;
-	canvas.height = videoElement.height;
+    canvas.width = videoElement.width;
+    canvas.height = videoElement.height;
 
-	this.getShot = function(callback, numFrames, interval) {
-		numFrames = numFrames !== undefined ? numFrames : 3;
-		interval = interval !== undefined ? interval : 0.1; // In seconds
+    this.getShot = function(callback, numFrames, interval) {
+        numFrames = numFrames !== undefined ? numFrames : 3;
+        interval = interval !== undefined ? interval : 0.1; // In seconds
 
-		var pendingFrames = numFrames;
-		var ag = new Animated_GIF({
-			workerPath: './lib/Animated_GIF/quantizer.js'
-		});
-		ag.setSize(canvas.width, canvas.height);
-		ag.setDelay(interval);
+        var pendingFrames = numFrames;
+        var ag = new Animated_GIF({
+            workerPath: './lib/Animated_GIF/quantizer.js'
+        });
+        ag.setSize(canvas.width, canvas.height);
+        ag.setDelay(interval);
 
-		captureFrame();
+        captureFrame();
 
-		function captureFrame() {
-			ag.addFrame(videoElement);
-			pendingFrames--;
+        function captureFrame() {
+            ag.addFrame(videoElement);
+            pendingFrames--;
 
-			if (pendingFrames > 0) {
-				setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
-			} else {
-				ag.getBase64GIF(function(image) {
-					var img = document.createElement('img');
-					img.setAttribute('id', 'target')
-					img.src = image;
+            if (pendingFrames > 0) {
+                setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
+            } else {
+                ag.getBase64GIF(function(image) {
+                    var img = document.createElement('img');
+                    img.setAttribute('id', 'target')
+                    img.src = image;
 
-					document.querySelector('#target_box').appendChild(img);
-					callback(image);
-				});
-			}
-		}
+                    document.querySelector('#target_box').appendChild(img);
+                    callback(image);
+                });
+            }
+        }
 
-	};
+    };
 }
 },{"./Animated_GIF/Animated_GIF.js":1}],6:[function(require,module,exports){
 // Browser Request
