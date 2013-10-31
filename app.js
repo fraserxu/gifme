@@ -1022,7 +1022,7 @@ function startStreaming(errorCallback, onStreaming, okCallback) {
 				attempts++;
 				setTimeout(findVideoSize, 200);
 			} else {
-				onDimensionsReady(720, 640);
+				onDimensionsReady(640, 480);
 			}
 		}
 	};
@@ -1108,14 +1108,32 @@ var imgur = {
 };
 
 var s = slidr.create('slidr-div')
-	.add('h', ['one', 'two'])
-	.add('v', ['two', 'three'], 'cube')
+	.add('h', ['one', 'two', 'three'])
+	.add('v', ['three', 'four'], 'cube')
 	.start();
 
 // buttons
+var camera_button = document.querySelector('#camera');
 var save_button = document.querySelector('#saveAs');
 var upload_button = document.querySelector('#upload');
 var capture_button = document.querySelector('#capture');
+
+// allow to use camera
+camera_button.addEventListener('click', function() {
+	if (navigator.getMedia) {
+		gumHelper.startVideoStreaming(function errorCb() {}, function successCallback(stream, videoElement, width, height) {
+			videoElement.width = width / 2;
+			videoElement.height = height / 2;
+			document.querySelector('#webcam').appendChild(videoElement);
+			videoElement.play();
+			videoShooter = new VideoShooter(videoElement);
+
+			s.slide('two');
+		});
+	} else {
+		alert('sorry, your browser does\'s support getMedia.');
+	}
+})
 
 function getScreenshot(callback, numFrames, interval) {
 	if (videoShooter) {
@@ -1129,26 +1147,14 @@ function getScreenshot(callback, numFrames, interval) {
 capture_button.addEventListener('click', function() {
 	var capture_text = capture_button.innerHTML;
 	
-	if (navigator.getMedia) {
-		gumHelper.startVideoStreaming(function errorCb() {}, function successCallback(stream, videoElement, width, height) {
-			videoElement.width = width / 2;
-			videoElement.height = height / 2;
-			document.querySelector('#webcam').appendChild(videoElement);
-			videoElement.play();
-			videoShooter = new VideoShooter(videoElement);
-			
-			capture_button.innerHTML = 'capturing...';
-			getScreenshot(function(pictureData) {
-				save_button.disabled = false;
-				upload_button.disabled = false;
+	capture_button.innerHTML = 'capturing...';
+	getScreenshot(function(pictureData) {
+		save_button.disabled = false;
+		upload_button.disabled = false;
 
-				capture_button.innerHTML = capture_text;
-				s.slide('two');
-			}, 10, 0.2);
-		});
-	} else {
-		alert('sorry, your browser does\'s support getMedia.');
-	}
+		capture_button.innerHTML = capture_text;
+		s.slide('three');
+	}, 10, 0.2);
 
 })
 

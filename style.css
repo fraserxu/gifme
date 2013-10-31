@@ -141,6 +141,10 @@ ul {
 	font-size: 20px;
 }
 
+#camera {
+	cursor: pointer;
+}
+
 #filename {
 	text-align: right;
 }
