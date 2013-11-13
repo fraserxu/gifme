@@ -2,8 +2,8 @@
 The easiest way to make and share a gif, right in the browser.
 
 Live demo:
-[http://xvfeng.me/gifme/](http://xvfeng.me/gifme/)
-[中文](http://xvfeng.me/gifme/cn.html)
+* [http://xvfeng.me/gifme/](http://xvfeng.me/gifme/)
+* [[中文版]](http://xvfeng.me/gifme/cn.html)
 
 #### Usage
 ```bash
