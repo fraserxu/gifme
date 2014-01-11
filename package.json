@@ -2,7 +2,6 @@
   "name": "gifme",
   "version": "0.2.1",
   "description": "the easiest way to make and share a gif, right in the browser.",
-  "main": "index.js",
   "repository": "https://github.com/fraserxu/gifme",
   "keywords": [
     "gifme"
