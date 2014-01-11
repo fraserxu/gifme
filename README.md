@@ -9,9 +9,8 @@ Live demo:
 ```bash
 $ cd gifme
 $ npm i
-$ npm i -g browserify
-$ bin/build
-$ open http://localhost:8000
+$ ./task.js
+$ open static/index.html
 ```
 
 #### Contributing
