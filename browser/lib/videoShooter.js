@@ -1,4 +1,4 @@
-var Animated_GIF = require('./Animated_GIF/Animated_GIF.js');
+var Animated_GIF = require('./Animated_GIF/Animated_GIF');
 
 module.exports = function(videoElement) {
     'use strict';
@@ -15,7 +15,7 @@ module.exports = function(videoElement) {
 
         var pendingFrames = numFrames;
         var ag = new Animated_GIF({
-            workerPath: './lib/Animated_GIF/quantizer.js'
+            workerPath: './Animated_GIF/quantizer.js'
         });
         ag.setSize(canvas.width, canvas.height);
         ag.setDelay(interval);

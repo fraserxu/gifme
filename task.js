@@ -4,6 +4,7 @@ var fs = require('fs');
 var vinyl = require('vinyl-fs');
 var browserify = require('browserify');
 var watchify = require('watchify');
+var workerify = require('workerify');
 var catw = require('catw');
 
 var cmd = process.argv[2];
@@ -13,7 +14,9 @@ else usage(1)
 
 function build (opts) {
   var js = opts.watch ? watchify : browserify;
-  js('./browser/main.js').bundle()
+  js('./browser/main.js')
+    .transform(workerify)
+    .bundle()
     .pipe(fs.createWriteStream('./static/bundle.js'))
   ;
 

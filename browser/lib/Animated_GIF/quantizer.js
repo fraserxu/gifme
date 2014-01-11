@@ -1,4 +1,4 @@
-importScripts('NeuQuant.js');
+var NeuQuant = require('./NeuQuant.js');
 
 function run(data) {
     var length = Object.keys(data).length;

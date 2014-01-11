@@ -1,4 +1,4 @@
-var GifWriter = require('./omggif.js');
+var GifWriter = require('./omggif');
 
 // A library/utility for generating GIF files
 // Uses Dean McNamee's omggif library
@@ -18,10 +18,10 @@ function Animated_GIF(options) {
 
     options = options || {};
     numWorkers = options.numWorkers || 2;
-    workerPath = options.workerPath || 'src/quantizer.js'; // XXX hardcoded path
+    // workerPath = options.workerPath || 'src/quantizer.js'; // XXX hardcoded path
 
     for(var i = 0; i < numWorkers; i++) {
-        var w = new Worker(workerPath);
+        var w = new Worker('./quantizer.js');
         workers.push(w);
         availableWorkers.push(w);
     }
@@ -77,7 +77,7 @@ function Animated_GIF(options) {
         var worker;
 
         frame = frames[position];
-        
+
         if(frame.beingProcessed || frame.done) {
             console.error('Frame already being processed or done!', frame.position);
             onFrameFinished();
@@ -85,7 +85,7 @@ function Animated_GIF(options) {
         }
 
         frame.beingProcessed = true;
-        
+
         worker = getWorker();
 
         worker.onmessage = function(ev) {
@@ -105,7 +105,7 @@ function Animated_GIF(options) {
             onFrameFinished();
         };
 
-        
+
         // TODO maybe look into transfer objects
         // for further efficiency
         var frameData = frame.data;
@@ -124,7 +124,7 @@ function Animated_GIF(options) {
                 break;
             }
         }
-        
+
         if(position >= 0) {
             processFrame(position);
         }
@@ -148,13 +148,13 @@ function Animated_GIF(options) {
         } else {
             setTimeout(processNextFrame, 1);
         }
-        
+
     }
 
     // Takes the already processed data in frames and feeds it to a new
     // GifWriter instance in order to get the binary GIF file
     function generateGIF(frames, callback) {
-        
+
         // TODO: Weird: using a simple JS array instead of a typed array,
         // the files are WAY smaller o_o. Patches/explanations welcome!
         var buffer = []; // new Uint8Array(width * height * frames.length * 5);
@@ -165,20 +165,20 @@ function Animated_GIF(options) {
         frames.forEach(function(frame) {
             onRenderProgressCallback(0.75 + 0.25 * frame.position * 1.0 / frames.length);
             gifWriter.addFrame(0, 0, width, height, frame.pixels, {
-                palette: frame.palette, 
-                delay: delay 
+                palette: frame.palette,
+                delay: delay
             });
         });
 
         gifWriter.end();
         onRenderProgressCallback(1.0);
-        
+
         frames = [];
         generatingGIF = false;
 
         callback(buffer);
     }
-    
+
     // ---
 
     this.setSize = function(w, h) {
@@ -208,7 +208,7 @@ function Animated_GIF(options) {
 
         ctx.drawImage(element, 0, 0, width, height);
         var data = ctx.getImageData(0, 0, width, height);
-        
+
         this.addFrameImageData(data.data);
     };
 
