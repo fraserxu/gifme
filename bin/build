@@ -1,4 +1,0 @@
-#!/bin/bash
-rm ./app.js
-browserify ./lib/index.js -o ./app.js
-python -m SimpleHTTPServer

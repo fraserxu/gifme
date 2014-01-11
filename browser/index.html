@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <title>gifme</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oxygen:400,300,700)">
-    <link rel='stylesheet' href='style.css'>
+    <link rel='stylesheet' href='bundle.css'>
 </head>
 <body>
     <div id="header">
@@ -44,19 +44,19 @@
 
     <div class='content' id='slidr-div'>
         <div class="box" data-slidr='one'>
-            <img id='camera' src="assets/camera.png" alt="camera">
+            <img id='camera' src="assets/images/camera.png" alt="camera">
         </div>
 
         <div class='box' data-slidr="two">
             <section id='webcam'>
-            </section>  
-            <button id='capture'>capture</button>  
+            </section>
+            <button id='capture'>capture</button>
         </div>
 
         <div class='box' data-slidr="three">
             <section id='target_box'>
             </section>
-        </div> 
+        </div>
 
         <div class='box' data-slidr="four">
             <div class="field">
@@ -65,30 +65,30 @@
                     <input type="text" id="filename" placeholder="gifme" />
                     .gif
                 </label>
-                <button id='saveAs' disabled>Save</button>    
+                <button id='saveAs' disabled>Save</button>
             </div>
-            
+
             <div class="field">
                 or: <button id='upload' disabled>Upload to imgur</button>
-                <span id='share_link'></span>        
+                <span id='share_link'></span>
             </div>
         </div>
-    </div>  
+    </div>
 
     <section id="footer">
         <p>Don't hesitate to share it with your friends and <a href='http://xvfeng.me'>me</a> on:</p>
         <ul>
             <li>
-                twitter <a href='https://twitter.com/xvfeng'>@xvfeng</a>       
+                twitter <a href='https://twitter.com/xvfeng'>@xvfeng</a>
             </li>
             <li>
-              weibo <a href='http://weibo.com/xvfeng123'>@fraserxv</a>  
+              weibo <a href='http://weibo.com/xvfeng123'>@fraserxv</a>
             </li>
         </ul>
-    </section> 
+    </section>
 
     <a href="https://github.com/fraserxu/gifme"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
-    <script src='app.js'></script>
+    <script src='bundle.js'></script>
 </body>
 </html>
