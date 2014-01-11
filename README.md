@@ -10,7 +10,7 @@ Live demo:
 $ cd gifme
 $ npm i
 $ ./task.js
-$ open static/index.html
+$ cd static && python -m SimpleHTTPServer
 ```
 
 #### Contributing
