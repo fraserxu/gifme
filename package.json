@@ -11,7 +11,11 @@
   "license": "BSD",
   "dependencies": {
     "browser-request": "~0.3.1",
-    "filesaver.js": "~2013.01.23"
+    "filesaver.js": "~2013.01.23",
+    "watchify": "~0.5.0",
+    "catw": "~0.2.0",
+    "browserify": "~3.19.1",
+    "vinyl-fs": "git://github.com/wearefractal/vinyl-fs"
   },
   "devDependencies": {
     "napa": "~0.1.1"
